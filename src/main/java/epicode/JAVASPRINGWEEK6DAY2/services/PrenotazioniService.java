@@ -35,4 +35,12 @@ public class PrenotazioniService {
 	public List<Prenotazione> getPrenotazioni() {
 		return this.prenotazioni;
 	}
+
+	public void create(Prenotazione prenotazione) {
+		if (prenotazione.getPostazione().isDisponibile() == true) {
+			this.prenotazioni.add(prenotazione);
+
+		}
+
+	}
 }
