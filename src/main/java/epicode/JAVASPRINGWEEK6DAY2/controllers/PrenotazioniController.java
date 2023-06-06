@@ -1,16 +1,30 @@
 package epicode.JAVASPRINGWEEK6DAY2.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import epicode.JAVASPRINGWEEK6DAY2.entities.Prenotazione;
+import epicode.JAVASPRINGWEEK6DAY2.services.PrenotazioniService;
+
 @RestController
 @RequestMapping("/prenotazioni")
 public class PrenotazioniController {
+	@Autowired
+	private PrenotazioniService prenotazioni;
+
 	@GetMapping("/info")
 	public String info() {
 		return "Inserisci una lingua scegliendo tra italiano e inglese";
+	}
+
+	@GetMapping("")
+	public List<Prenotazione> getPrenotazioni() {
+		return prenotazioni.getPrenotazioni();
 	}
 
 	@GetMapping("/info/{lingua}")
