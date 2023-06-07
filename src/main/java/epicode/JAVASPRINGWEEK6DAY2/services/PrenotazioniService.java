@@ -36,11 +36,29 @@ public class PrenotazioniService {
 		return this.prenotazioni;
 	}
 
-	public void create(Prenotazione prenotazione) {
-		if (prenotazione.getPostazione().isDisponibile() == true) {
+	public Prenotazione create(Utente utente, Postazione postazione, LocalDate day) {
+		Prenotazione prenotazione = new Prenotazione();
+
+		boolean isDataPresente = utente.getPrenotazioni().stream().anyMatch(p -> p.getDataPrenotazione().equals(day));
+		if (isDataPresente == false) {
+			prenotazione.setUtente(utente);
+			prenotazione.setDataPrenotazione(day);
+		} else {
+			System.out.println("questo utente non può prenotare nessuna postazione in questa data");
+		}
+
+		if (postazione.isDisponibile() == true) {
+			prenotazione.setPostazione(postazione);
+		} else {
+			System.out.println("questa postazione non è disponibile");
+		}
+
+		if (prenotazione.getUtente() != null && prenotazione.getPostazione() != null
+				&& prenotazione.getDataPrenotazione() != null) {
 			this.prenotazioni.add(prenotazione);
 
 		}
+		return prenotazione;
 
 	}
 }

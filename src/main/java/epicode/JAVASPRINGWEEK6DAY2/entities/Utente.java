@@ -1,5 +1,6 @@
 package epicode.JAVASPRINGWEEK6DAY2.entities;
 
+import java.util.List;
 import java.util.Random;
 
 import lombok.Getter;
@@ -13,12 +14,14 @@ public class Utente {
 	private String username;
 	private String name;
 	private String email;
+	private List<Prenotazione> prenotazioni;
 
 	public Utente(String username, String name, String email) {
 		super();
 		this.username = username;
 		this.name = name;
 		this.email = email;
+
 	}
 
 	@Override

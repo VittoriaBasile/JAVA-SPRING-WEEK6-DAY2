@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Prenotazione {
 	private Random r = new Random();
 	private int id = r.nextInt(0, 100);
@@ -17,7 +19,6 @@ public class Prenotazione {
 	private LocalDate dataScadenza;
 
 	public Prenotazione(Utente utente, Postazione postazione, LocalDate dataPrenotazione) {
-		super();
 		this.utente = utente;
 		this.postazione = postazione;
 		this.dataPrenotazione = dataPrenotazione;

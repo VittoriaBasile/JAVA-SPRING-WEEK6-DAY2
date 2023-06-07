@@ -1,16 +1,21 @@
 package epicode.JAVASPRINGWEEK6DAY2.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import epicode.JAVASPRINGWEEK6DAY2.entities.Postazione;
 import epicode.JAVASPRINGWEEK6DAY2.entities.Prenotazione;
+import epicode.JAVASPRINGWEEK6DAY2.entities.Utente;
 import epicode.JAVASPRINGWEEK6DAY2.services.PrenotazioniService;
 
 @RestController
@@ -39,12 +44,16 @@ public class PrenotazioniController {
 			return "Inserisci una lingua scegliendo tra italiano e inglese";
 		}
 	}
-	
+
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-//	public User saveUser(@RequestBody User body) {
-//		User createdUser = usersService.saveNewUser(body);
-//		return createdUser;
-//	}
-
+	public Prenotazione savePrenotazione(@RequestBody Utente utente, Postazione postazione, LocalDate day) {
+		Prenotazione createdPrenotazione;
+		try {
+			createdPrenotazione = PrenotazioniService.create(utente, postazione, day);
+		} catch (Exception e) {
+			throw new WebServiceException("Prenotazione not updated", Prenotazione.class, e);
+		}
+		return createdPrenotazione;
+	}
 }
